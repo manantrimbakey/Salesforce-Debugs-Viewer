@@ -1,7 +1,11 @@
-import React from "react";
-
+import { Container } from "@mui/material";
+import StartPage from "./components/startPage/StartPage";
 function App() {
-  return <p>Hello World</p>;
+    return (
+        <Container maxWidth={false} sx={{ height: "100%" }}>
+            <StartPage />
+        </Container>
+    );
 }
 
 export default App;

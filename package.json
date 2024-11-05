@@ -11,14 +11,15 @@
     "prettier": "prettier --write .",
     "build:backend": "tsc",
     "build:frontend": "npm run build --prefix ./frontend",
-    "build": "tsc && npm run build:frontend"
+    "build": "tsc && npm run build:frontend",
+    "custom_start": "npm run build:frontend && npm run dev:backend"
   },
   "repository": "https://github.com/apicgg/vite-mern-template.git",
   "license": "MIT",
   "dependencies": {
     "argon2": "^0.40.1",
     "dotenv": "^16.4.5",
-    "express": "^4.20.0",
+    "express": "^4.21.1",
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.7.0"
