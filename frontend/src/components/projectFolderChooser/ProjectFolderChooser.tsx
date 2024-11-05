@@ -1,14 +1,9 @@
-import { Box, Button } from "@mui/material";
+import { Backdrop, Box, Button, CircularProgress, TextField } from "@mui/material";
 import FolderIcon from "@mui/icons-material/Folder";
 import { GlobalObject } from "../startPage/StartPage";
 import axios from "axios";
-
-// Add this interface at the top of the file, after the imports
-interface CustomInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-    webkitdirectory?: string;
-    directory?: string;
-    path?: string;
-}
+import Spinner from "../spinner/Spinner";
+import { useState } from "react";
 
 const ProjectFolderChooser = ({
     globalObject,
@@ -17,45 +12,55 @@ const ProjectFolderChooser = ({
     globalObject: GlobalObject;
     setGlobalObject: (globalObject: GlobalObject) => void;
 }) => {
-    const handleChooseFolder = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log("e", JSON.stringify(e.target.files?.[0]));
-        const folderPath = e.target.files?.[0]?.webkitRelativePath.split("/")[0];
-        setGlobalObject({ ...globalObject, projectFolderPath: folderPath || null });
-        // Send project path to backend
-        window.dispatchEvent(new CustomEvent("setLoading", { detail: true }));
-        if (folderPath) {
-            try {
-                await axios.post("/setProjectPath", {
-                    projectPath: folderPath,
-                });
-                window.dispatchEvent(new CustomEvent("setLoading", { detail: false }));
-            } catch (error) {
-                console.error("Error setting project path:", error);
-            }
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleSubmitPath = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const projectPath = formData.get("projectPath") as string;
+
+        if (!projectPath) return;
+
+        setGlobalObject({ ...globalObject, projectFolderPath: projectPath });
+
+        setIsLoading(true);
+        try {
+            await axios.post("/setProjectPath", {
+                projectPath: projectPath,
+            });
+            setIsLoading(false);
+        } catch (error) {
+            console.error("Error setting project path:", error);
+            setIsLoading(false);
         }
     };
 
     return (
-        <Box
-            sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                minHeight: "60vh",
-            }}
-        >
-            <input
-                style={{ display: "none" }}
-                id="raised-button-file"
-                type="file"
-                aria-label="Choose project folder"
-                {...({ webkitdirectory: "", directory: "" } as CustomInputProps)}
-                onChange={handleChooseFolder}
-            />
-            <label htmlFor="raised-button-file">
+        <>
+            {isLoading && <Spinner />}
+            <Box
+                component="form"
+                onSubmit={handleSubmitPath}
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: "100%",
+                    gap: 2,
+                }}
+            >
+                <TextField
+                    required
+                    fullWidth
+                    id="projectPath"
+                    name="projectPath"
+                    label="SFDX Project Path"
+                    placeholder="Enter the full path to your SFDX project"
+                    sx={{ maxWidth: "500px" }}
+                />
                 <Button
-                    component="span"
+                    type="submit"
                     variant="contained"
                     size="large"
                     startIcon={<FolderIcon />}
@@ -65,10 +70,10 @@ const ProjectFolderChooser = ({
                         textTransform: "none",
                     }}
                 >
-                    Choose Project Folder
+                    Set Project Path
                 </Button>
-            </label>
-        </Box>
+            </Box>
+        </>
     );
 };
 

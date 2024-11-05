@@ -19,11 +19,15 @@ const startServer = async () => {
     res.sendFile("index.html", { root: "frontend/build" });
   });
 
-  app.post("/setProjectPath", (req, res) => {
+  app.post("/setProjectPath", async (req, res) => {
     const projectPath = req.body.projectPath;
     console.log("projectPath", projectPath);
-    SFConnecter.setProjectPath(projectPath);
-    res.sendStatus(200);
+    const isConnected = await SFConnecter.setProjectPath(projectPath);
+    res.json({
+      isConnected,
+      projectPath: SFConnecter.getProjectPath(),
+      instanceURL: SFConnecter.getInstanceUrl(),
+    });
   });
 };
 
