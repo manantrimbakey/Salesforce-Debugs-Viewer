@@ -6,8 +6,8 @@ import chalk from "chalk";
  */
 export class Logger {
     private static instance: Logger;
-    private logLevel: "debug" | "info" | "warn" | "error" = "info";
-    private enabled: boolean = true;
+    private logLevel: "debug" | "info" | "warn" | "error" = "debug";
+    private enabled: boolean = process.env.NODE_ENV === "development";
 
     private constructor() {}
 
@@ -59,7 +59,7 @@ export class Logger {
      */
     debug(message: string, ...args: unknown[]): void {
         if (this.enabled && this.shouldLog("debug")) {
-            console.debug(chalk.gray(`[DEBUG] ${message}`), ...args);
+            console.debug(chalk.green(`[DEBUG] ${message}`), ...args);
         }
     }
 

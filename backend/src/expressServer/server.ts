@@ -28,7 +28,19 @@ const startServer = async () => {
             isConnected,
             projectPath: SFConnecter.getProjectPath(),
             instanceURL: SFConnecter.getInstanceUrl(),
+            username: SFConnecter.getUsername(),
         });
+    });
+
+    app.get("/getLogs", async (req, res) => {
+        const logs = await SFConnecter.getLogs();
+        res.status(200).json(logs);
+    });
+
+    app.get("/getLogInfo/:logId", async (req, res) => {
+        const logId = req.params.logId;
+        const logInfo = await SFConnecter.getLogInfo(logId);
+        res.status(200).json(logInfo);
     });
 };
 

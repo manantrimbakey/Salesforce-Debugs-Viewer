@@ -25,10 +25,19 @@ const ProjectFolderChooser = ({
 
         setIsLoading(true);
         try {
-            await axios.post("/setProjectPath", {
+            const response = await axios.post("/setProjectPath", {
                 projectPath: projectPath,
             });
             setIsLoading(false);
+            if (response.data.isConnected) {
+                setGlobalObject({
+                    ...globalObject,
+                    instanceURL: response.data.instanceURL,
+                    username: response.data.username,
+                    isConnected: true,
+                    currentScreen: "logViewer",
+                });
+            }
         } catch (error) {
             console.error("Error setting project path:", error);
             setIsLoading(false);

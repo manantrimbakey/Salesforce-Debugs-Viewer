@@ -90,20 +90,20 @@ class SFConnection {
 
                 this.isConnected = !!(this.currentUserId && this.instanceUrl && this.authToken);
 
-                // logger.info(`Connected to Salesforce instance: ${this.instanceUrl}`);
-                // logger.info(`Current User ID: ${this.currentUserId}`);
-                // logger.info(`Auth Token: ${this.authToken}`);
-                // logger.info(`Is Connected: ${this.isConnected}`);
+                logger.debug(`Connected to Salesforce instance: ${this.instanceUrl}`);
+                logger.debug(`Current User ID: ${this.currentUserId}`);
+                logger.debug(`Auth Token: ${this.authToken}`);
+                logger.debug(`Is Connected: ${this.isConnected}`);
 
                 return this.isConnected;
             } catch (parseError) {
-                // logger.error('Failed to parse SFDX command output:', parseError);
+                logger.error("Failed to parse SFDX command output:", parseError);
                 return false;
             }
         }
 
         if (stderr) {
-            // logger.error(`Error executing ${cmd}:`, stderr);
+            logger.error(`Error executing ${cmd}:`, stderr);
         }
 
         return false;
@@ -136,12 +136,11 @@ class SFConnection {
 
             if (stdout) {
                 const logs = JSON.parse(removeAnsiCodes(stdout));
-                // const logs = JSON.parse(stdout);
-                // logger.info(`logs=> `, logs);
+                logger.debug(`logs=> `, logs);
                 return logs?.result?.records || [];
             }
         } catch (err) {
-            // logger.error('Failed to execute command:', err);
+            logger.error("Failed to execute command:", err);
         }
 
         return [];
@@ -225,6 +224,7 @@ class SFConnection {
                 });
         });
     }
+
     /**
      * Retrieves information about a specific log entry from the Salesforce Apex log.
      *
@@ -268,6 +268,15 @@ class SFConnection {
      */
     public setRestServerPort(port: number): void {
         this.restServerPort = port;
+    }
+
+    /**
+     * Retrieves the username of the current Salesforce user.
+     *
+     * @returns {string} The username.
+     */
+    public getUsername(): string {
+        return this.username;
     }
 }
 

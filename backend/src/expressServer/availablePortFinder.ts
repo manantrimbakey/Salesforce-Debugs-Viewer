@@ -25,7 +25,7 @@ const findAvailablePort = async (startPort: number): Promise<number> => {
 
     let port = startPort;
     while (!(await isPortAvailable(port))) {
-        logger.info(`Port ${port} is in use, trying ${port + 1}`);
+        logger.warn(`Port ${port} is in use, trying ${port + 1}`);
         port++;
     }
 
