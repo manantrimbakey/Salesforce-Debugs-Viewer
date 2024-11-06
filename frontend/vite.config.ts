@@ -22,6 +22,7 @@ export default defineConfig({
     }),
   ],
   build: {
+    // outDir: "../build/frontend", // THIS SHOULD BE USED IN PRODUCTION
     outDir: "./build",
     rollupOptions: {
       output: {
