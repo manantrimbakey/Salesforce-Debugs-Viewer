@@ -1,4 +1,4 @@
-import { Backdrop, Box, Button, CircularProgress, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import FolderIcon from "@mui/icons-material/Folder";
 import { GlobalObject } from "../startPage/StartPage";
 import axios from "axios";

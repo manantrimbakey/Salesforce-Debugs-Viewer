@@ -11,13 +11,13 @@ import stripAnsi from "strip-ansi";
  * - In production: Returns a file:// URL pointing to the renderer directory
  */
 export function resolveHtmlPath(htmlFileName: string): string {
-  if (process.env.NODE_ENV === "development") {
-    const port = process.env.PORT || 1212;
-    const url = new URL(`http://localhost:${port}`);
-    url.pathname = htmlFileName;
-    return url.href;
-  }
-  return `file://${path.resolve(__dirname, "../renderer/", htmlFileName)}`;
+    if (process.env.NODE_ENV === "development") {
+        const port = process.env.PORT || 1212;
+        const url = new URL(`http://localhost:${port}`);
+        url.pathname = htmlFileName;
+        return url.href;
+    }
+    return `file://${path.resolve(__dirname, "../renderer/", htmlFileName)}`;
 }
 
 /**
@@ -29,5 +29,5 @@ export function resolveHtmlPath(htmlFileName: string): string {
  * This function strips them out to get plain text.
  */
 export function removeAnsiCodes(str: string): string {
-  return stripAnsi(str);
+    return stripAnsi(str);
 }
