@@ -12,7 +12,7 @@
         "build:backend": "cross-env NODE_ENV=production tsc",
         "build:frontend": "cross-env NODE_ENV=production npm run build --prefix ./frontend",
         "build": "tsc && npm run build:frontend",
-        "custom_start": "npm run build:frontend && npm run dev:backend"
+        "custom_start": "cross-env NODE_ENV=development \"npm run dev:backend\" \"npm run dev:frontend\""
     },
     "repository": "https://github.com/apicgg/vite-mern-template.git",
     "license": "MIT",
