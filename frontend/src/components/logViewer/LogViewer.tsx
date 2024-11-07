@@ -11,7 +11,6 @@ import {
     Grid2 as Grid,
     Typography,
     Button,
-    Divider,
 } from "@mui/material";
 import { ArrowBack, RefreshRounded } from "@mui/icons-material";
 import { useEffect, useState } from "react";

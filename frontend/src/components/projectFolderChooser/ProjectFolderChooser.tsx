@@ -68,7 +68,7 @@ const ProjectFolderChooser = ({
                     name="projectPath"
                     label="SFDX Project Path"
                     placeholder="Enter the full path to your SFDX project"
-                    sx={{ maxWidth: "500px" }}
+                    sx={{ width: "500px" }}
                 />
                 <Button
                     type="submit"
@@ -79,6 +79,7 @@ const ProjectFolderChooser = ({
                         padding: "20px 40px",
                         fontSize: "1.2rem",
                         textTransform: "none",
+                        width: "500px",
                     }}
                 >
                     View Logs!

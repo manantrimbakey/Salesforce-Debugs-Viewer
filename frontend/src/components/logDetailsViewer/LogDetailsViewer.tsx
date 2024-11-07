@@ -4,7 +4,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 // import { ipcCallSendMessage } from '../IpcCaller/IpcCaller';
 // import { GET_LOG_BODY_CHANNEL } from '../../../global_constants';
-export default function LogDetailsViewer({ logId }: { logId: string }) {
+export default function LogDetailsViewer({ logId }: Readonly<{ logId: string }>) {
     let initialized = useRef(false);
     const [methodName, setMethodName] = useState("");
 
