@@ -23,13 +23,12 @@ const StartPage = () => {
     });
 
     return (
-        <Container maxWidth="lg" sx={{ height: "100%", py: 4 }}>
+        <Container maxWidth="lg" sx={{ height: "100%" }}>
             <Box
                 sx={{
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    gap: 4,
                 }}
             >
                 {globalObject.currentScreen === "projectFolderChooser" && (

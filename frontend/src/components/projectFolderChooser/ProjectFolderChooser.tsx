@@ -21,7 +21,7 @@ const ProjectFolderChooser = ({
 
         if (!projectPath) return;
 
-        setGlobalObject({ ...globalObject, projectFolderPath: projectPath });
+        // setGlobalObject({ ...globalObject, projectFolderPath: projectPath });
 
         setIsLoading(true);
         try {
@@ -34,6 +34,7 @@ const ProjectFolderChooser = ({
                     ...globalObject,
                     instanceURL: response.data.instanceURL,
                     username: response.data.username,
+                    projectFolderPath: response.data.projectPath,
                     isConnected: true,
                     currentScreen: "logViewer",
                 });
@@ -57,6 +58,7 @@ const ProjectFolderChooser = ({
                     justifyContent: "center",
                     height: "100%",
                     gap: 2,
+                    py: 4,
                 }}
             >
                 <TextField
@@ -79,7 +81,7 @@ const ProjectFolderChooser = ({
                         textTransform: "none",
                     }}
                 >
-                    Set Project Path
+                    View Logs!
                 </Button>
             </Box>
         </>
