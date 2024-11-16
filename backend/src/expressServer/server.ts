@@ -10,14 +10,19 @@ app.use(express.urlencoded({ extended: true }));
 const startServer = async () => {
     const port = await findAvailablePortAndSetServerPort();
 
-    app.use(express.static("frontend/build"));
+    if (process.env.NODE_ENV === "development") {
+        app.use(express.static("frontend/build"));
+    } else {
+        app.use(express.static("build/frontend"));
+    }
 
     app.listen(port, () => {
         logger.info(`Server is running on port ${port}`);
     });
 
     app.get("/", (req, res) => {
-        res.sendFile("index.html", { root: "frontend/build" });
+        const root = process.env.NODE_ENV === "development" ? "frontend/build" : "build/frontend";
+        res.sendFile("index.html", { root });
     });
 
     app.post("/setProjectPath", async (req, res) => {

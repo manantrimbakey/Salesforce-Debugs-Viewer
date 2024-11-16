@@ -47,8 +47,7 @@ export default defineConfig({
         }),
     ],
     build: {
-        // outDir: "../build/frontend", // THIS SHOULD BE USED IN PRODUCTION
-        outDir: "./build",
+        outDir: process.env.NODE_ENV === "production" ? "../build/frontend" : "./build",
         rollupOptions: {
             output: {
                 entryFileNames: `assets/[name].js`,
