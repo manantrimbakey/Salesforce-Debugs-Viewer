@@ -1,115 +1,114 @@
-# vite-mern-template
+# Salesforce Log Viewer
 
-[![Depfu](https://badges.depfu.com/badges/1b70410a7764005553d576dd171dce8d/status.svg)](https://depfu.com)
-[![Depfu](https://badges.depfu.com/badges/1b70410a7764005553d576dd171dce8d/count.svg)](https://depfu.com/github/apicgg/vite-mern-template?project_id=38988)
+A modern web application for viewing and managing Salesforce debug logs with an enhanced user experience. Built with React, TypeScript, and Express.js.
 
-> Simple opinionated boilerplate for MERN stack with Vite, Redux Toolkit and TypeScript.
+## Features
 
-> This includes React+TypeScript with familiar configuration for vite.config.ts for front-end and Express+TypeScript for back-end.
+- 🔍 Real-time log viewing and filtering
+- 👤 User-specific log filtering
+- 🌐 Direct integration with Salesforce CLI
+- 🎨 Dark/Light theme support
+- 📊 Detailed log analysis
+- 🔄 Auto-refresh capabilities
+- 💾 Session storage for better performance
 
-Feel free to add or tweak the setup as needed.
+## Prerequisites
 
-This has been created with the official [Vite](https://vitejs.dev/) template (`npm create vite@latest`) and some extended setup. There are two separate folders called `backend` and `frontend`. The entry point for the backend is `backend/src/index.js`.
-
-Any package manager can be used with this project (e.g. npm or yarn or pnpm).
-
-```
-If you love this boilerplate, give it a star, you will be a ray of sunshine in our lives :)
-```
-
-> Thanks to [awesome-vite](https://github.com/vitejs/awesome-vite) for publishing this project.
-
-## Tools & Technology
-
-### Front-end
-
-- [React](https://reactjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [React Router DOM](https://reactrouter.com/)
-- [Redux Toolkit](https://redux-toolkit.js.org/)
-- [TanStack Query](https://tanstack.com/query/latest)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
-- [Vitest](https://vitest.dev/)
-- [Prettier](https://prettier.io/)
-- [Eslint](https://eslint.org/)
-
-### Back-end
-
-- [Node.js](https://nodejs.org/en)
-- [Express](https://expressjs.com/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [express-async-handler](https://www.npmjs.com/package/express-async-handler)
-- [mongoose](https://mongoosejs.com/)
-- [argon2](https://www.npmjs.com/package/argon2)
-- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
-- [Prettier](https://prettier.io/)
-- [Eslint](https://eslint.org/)
-
-#### The dependency versions are managed by [depfu](https://depfu.com/).
-
-## Requirements
-
-- [Node.js](https://nodejs.org/en/) 18+
-
-## Demo
-
-![vite-mern-template-gh-demo](https://user-images.githubusercontent.com/78271602/234833309-fe8df564-2895-4727-be1e-c807fe142333.gif)
+- Node.js (v14 or higher)
+- Salesforce CLI (sf) installed and configured
+- Valid Salesforce org with appropriate permissions
 
 ## Installation
 
+1. Clone the repository:
 ```bash
-npx degit apicgg/vite-mern-template my-app
+git clone [repository-url]
 ```
 
-or
-
+2. Install dependencies for both frontend and backend:
 ```bash
-git clone https://github.com/apicgg/vite-mern-template.git
-```
+# Install backend dependencies
+cd backend
+npm install
 
-## Install dependencies (npm or yarn or pnpm)
-
-- Backend
-
-```bash
+# Install frontend dependencies
+cd ../frontend
 npm install
 ```
 
-- Frontend
+## Configuration
 
+1. Ensure you have authenticated with your Salesforce org using Salesforce CLI:
 ```bash
+sf org login web
+```
+
+2. The application will automatically detect your Salesforce project path and credentials.
+
+## Usage
+
+1. Start the development servers:
+```bash
+# Start backend server
+cd backend
+npm run dev
+
+# Start frontend server
 cd frontend
-npm install
+npm run dev
 ```
 
-## Start the development server
+2. Open your browser and navigate to `http://localhost:1212`
 
-- Backend
+3. Enter your SFDX project path to connect to your Salesforce org
 
-```bash
-npm run dev:backend
+4. View and filter logs by:
+   - User
+   - Date
+   - Log size
+   - Method name
+
+## Architecture
+
+- **Frontend**: React + TypeScript + Material-UI
+- **Backend**: Express.js + TypeScript
+- **Authentication**: Salesforce CLI integration
+- **State Management**: React hooks
+- **Styling**: Material-UI components
+
+## Project Structure
+
+```
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── App.tsx
+│   │   └── main.tsx
+│   └── package.json
+├── backend/
+│   ├── src/
+│   │   ├── expressServer/
+│   │   ├── sfUtils/
+│   │   ├── utils/
+│   │   └── index.ts
+│   └── package.json
+└── README.md
 ```
 
-- Frontend
+## Contributing
 
-```bash
-npm run dev:frontend
-```
-
-- Remove the .github folder and initialize your own git repository with ```git init```.
-
-## TODO
-
-- [x] Include eslint and prettier.
-- [x] Add testing framework.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 
-MIT License.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-Please review the [License](https://github.com/apicgg/vite-mern-template/blob/main/LICENSE).
+## Acknowledgments
 
-## Contributors ✨
-
-Contributions of any kind welcome! Kindly have a look into [Contributing Guidelines](CONTRIBUTING.md)
+- Material-UI for the component library
+- Salesforce CLI for the integration capabilities
+- React community for the excellent tooling
