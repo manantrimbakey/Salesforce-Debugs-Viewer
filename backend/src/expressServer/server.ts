@@ -38,9 +38,26 @@ const startServer = async () => {
     });
 
     app.get("/getLogInfo/:logId", async (req, res) => {
+        logger.info(`getLogInfo: ${req.params.logId}`);
         const logId = req.params.logId;
         const logInfo = await SFConnecter.getLogInfo(logId);
         res.status(200).json(logInfo);
+    });
+
+    app.get("/getUsersBySearch/:search", async (req, res) => {
+        logger.info(`getUsersBySearch: ${req.params.search}`);
+        const search = req.params.search;
+        const users = await SFConnecter.getUsersBySearch(search);
+        res.status(200).json(users);
+    });
+
+    app.post("/setUserId", async (req, res) => {
+        if (req?.body?.userId) {
+            logger.info(`setUserId: ${req?.body?.userId}`);
+            const userId = req?.body?.userId;
+            await SFConnecter.setUserId(userId);
+        }
+        res.status(200).json({ success: true });
     });
 };
 

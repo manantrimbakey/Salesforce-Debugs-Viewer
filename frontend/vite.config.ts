@@ -26,6 +26,16 @@ export default defineConfig({
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/getLogInfo/, ""),
             },
+            "/getUsersBySearch": {
+                target: "http://localhost:4000/getUsersBySearch",
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/getUsersBySearch/, ""),
+            },
+            "/setUserId": {
+                target: "http://localhost:4000/setUserId",
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/setUserId/, ""),
+            },
         },
     },
     plugins: [

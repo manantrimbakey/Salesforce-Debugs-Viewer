@@ -2,11 +2,11 @@ import { exec } from "child_process";
 import { promisify } from "util";
 import { SFDX_GET_USER_INFO_CMD } from "../globalConstants";
 // import { logger } from '../utils/logger';
-import { removeAnsiCodes } from "../utils/utils";
 import { Express, Request, Response } from "express";
-import https from "https";
 import { IncomingMessage } from "http";
+import https from "https";
 import { logger } from "../utils/logger";
+import { removeAnsiCodes } from "../utils/utils";
 
 const promisifyExec = promisify(exec);
 
@@ -277,6 +277,30 @@ class SFConnection {
      */
     public getUsername(): string {
         return this.username;
+    }
+
+    /**
+     * Sets the current user ID for the Salesforce connection.
+     *
+     * @param {string} userId - The ID of the user to set.
+     */
+    public setUserId(userId: string): void {
+        this.currentUserId = userId;
+    }
+
+    public async getUsersBySearch(search: string): Promise<unknown> {
+        search = search?.trim();
+        if (!search || search.length < 3) {
+            return [];
+        }
+        const command = `sf data query --query "SELECT Id, Name, Username FROM User WHERE Name LIKE '%${search}%' ORDER BY Name ASC LIMIT 10" --json`;
+        const options = { cwd: this.projectPath };
+
+        const { stdout, stderr } = await promisifyExec(command, options);
+        logger.debug(`stdout=> `, stdout);
+        const users = JSON.parse(removeAnsiCodes(stdout)).result.records;
+        logger.debug(`users=> `, users);
+        return users;
     }
 }
 
