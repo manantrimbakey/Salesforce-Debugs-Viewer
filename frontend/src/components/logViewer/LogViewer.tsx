@@ -50,6 +50,7 @@ export default function LogViewerPage({
     const [options, setOptions] = useState<User[]>([]);
     const [inputValue, setInputValue] = useState("");
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
+    const [isLoadingForSearch, setIsLoadingForSearch] = useState(false);
 
     const fetchLogs = useCallback(async () => {
         setIsLoading(true);
@@ -68,7 +69,7 @@ export default function LogViewerPage({
 
     const handleUserSearch = useCallback(async (searchValue: string) => {
         if (searchValue?.trim()?.length >= 3) {
-            setIsLoading(true);
+            setIsLoadingForSearch(true);
             try {
                 const response = await axios.get(`/getUsersBySearch/${searchValue}`);
                 setOptions(response.data);
@@ -76,7 +77,7 @@ export default function LogViewerPage({
                 console.error("Error fetching users:", error);
                 setOptions([]);
             } finally {
-                setIsLoading(false);
+                setIsLoadingForSearch(false);
             }
         } else {
             setOptions([]);
@@ -183,8 +184,12 @@ export default function LogViewerPage({
                                 options={options}
                                 loading={isLoading}
                                 value={selectedUser}
-                                onChange={(event, newValue) => handleUserChange(newValue)}
-                                onInputChange={(event, newValue) => setInputValue(newValue)}
+                                onChange={(event, newValue) => {
+                                    handleUserChange(newValue);
+                                }}
+                                onInputChange={(event, newValue) => {
+                                    setInputValue(newValue);
+                                }}
                                 renderInput={(params) => (
                                     <TextField
                                         {...params}
@@ -196,7 +201,7 @@ export default function LogViewerPage({
                                                 ...params.InputProps,
                                                 endAdornment: (
                                                     <>
-                                                        {isLoading ? (
+                                                        {isLoadingForSearch ? (
                                                             <CircularProgress color="inherit" size={20} />
                                                         ) : null}
                                                         {params.InputProps.endAdornment}
