@@ -8,6 +8,7 @@ A modern web application for viewing and managing Salesforce debug logs with an 
 - 👤 User-specific log filtering
 - 🌐 Direct integration with Salesforce CLI
 - 🎨 Dark/Light theme support
+- 📊 MOST IMPORTANTLY: It shows which method has started the log creation
 
 ## Prerequisites
 
