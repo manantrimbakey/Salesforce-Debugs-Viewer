@@ -21,8 +21,6 @@ const ProjectFolderChooser = ({
 
         if (!projectPath) return;
 
-        // setGlobalObject({ ...globalObject, projectFolderPath: projectPath });
-
         setIsLoading(true);
         try {
             const response = await axios.post("/setProjectPath", {
@@ -35,6 +33,7 @@ const ProjectFolderChooser = ({
                     instanceURL: response.data.instanceURL,
                     username: response.data.username,
                     projectFolderPath: response.data.projectPath,
+                    currentUserId: response.data.currentUserId,
                     isConnected: true,
                     currentScreen: "logViewer",
                 });

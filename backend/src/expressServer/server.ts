@@ -29,6 +29,7 @@ const startServer = async () => {
             projectPath: SFConnecter.getProjectPath(),
             instanceURL: SFConnecter.getInstanceUrl(),
             username: SFConnecter.getUsername(),
+            currentUserId: SFConnecter.getCurrentUserId(),
         });
     });
 

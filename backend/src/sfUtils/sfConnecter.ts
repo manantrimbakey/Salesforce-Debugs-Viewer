@@ -288,6 +288,15 @@ class SFConnection {
         this.currentUserId = userId;
     }
 
+    /**
+     * Retrieves the current user ID for the Salesforce connection.
+     *
+     * @returns {string} The current user ID.
+     */
+    public getCurrentUserId(): string {
+        return this.currentUserId;
+    }
+
     public async getUsersBySearch(search: string): Promise<unknown> {
         search = search?.trim();
         if (!search || search.length < 3) {
